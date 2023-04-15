@@ -2,7 +2,6 @@ package hw_seminar1;
 
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Scanner;
 
 public class MainClassFromSeminarOneHW {
@@ -28,13 +27,18 @@ public class MainClassFromSeminarOneHW {
         System.out.println("task4");
         hello();
 
+        System.out.println("task5");
+        int[] arrayInt = {1, 1, 1, 0, 0, 0, 0, 0};
+        System.out.println("before\t" + Arrays.toString(arrayInt));
+        System.out.println("after\t" + Arrays.toString(displaceElements(arrayInt, 1)));
+
     }
 
     /*
-    * 1. Написать метод, принимающий на вход два аргумента:
-    * len и initialValue, и возвращающий одномерный массив
-    * типа int длиной len, каждая ячейка которого равна initialValue;
-    * */
+     * 1. Написать метод, принимающий на вход два аргумента:
+     * len и initialValue, и возвращающий одномерный массив
+     * типа int длиной len, каждая ячейка которого равна initialValue;
+     * */
     public static int[] createArray(int len, int initialValue) {
         int[] newArray = new int[len];
         Arrays.fill(newArray, initialValue);
@@ -42,12 +46,12 @@ public class MainClassFromSeminarOneHW {
     }
 
     /*
-    * 3. Создать квадратный двумерный целочисленный массив
-    * (количество строк и столбцов одинаковое), и с помощью цикла(-ов)
-    * заполнить его диагональные элементы единицами (можно только одну из диагоналей, если обе сложно).
-    * Определить элементы одной из диагоналей можно по следующему принципу: индексы таких элементов
-    * равны, то есть [0][0], [1][1], [2][2], …, [n][n];
-    * */
+     * 3. Создать квадратный двумерный целочисленный массив
+     * (количество строк и столбцов одинаковое), и с помощью цикла(-ов)
+     * заполнить его диагональные элементы единицами (можно только одну из диагоналей, если обе сложно).
+     * Определить элементы одной из диагоналей можно по следующему принципу: индексы таких элементов
+     * равны, то есть [0][0], [1][1], [2][2], …, [n][n];
+     * */
     public static int[][] generateSquareMatrix(int side) {
         int[][] matrix = new int[side][side];
         int reverseDot = matrix.length - 1;
@@ -66,21 +70,21 @@ public class MainClassFromSeminarOneHW {
     }
 
     public static void printMatrix(int[][] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                System.out.print(arr[i][j] + " ");
+        for (int[] ints : arr) {
+            for (int anInt : ints) {
+                System.out.print(anInt + " ");
             }
             System.out.println();
         }
     }
 
     /*
-    * 4. В консоли запросить имя пользователя. В зависимости от текущего времени, вывести приветствие вида:
-    * "Доброе утро, <Имя>!", если время от 05:00 до 11:59
-    * "Добрый день, <Имя>!", если время от 12:00 до 17:59;
-    * "Добрый вечер, <Имя>!", если время от 18:00 до 22:59;
-    * "Доброй ночи, <Имя>!", если время от 23:00 до 4:59
-    * */
+     * 4. В консоли запросить имя пользователя. В зависимости от текущего времени, вывести приветствие вида:
+     * "Доброе утро, <Имя>!", если время от 05:00 до 11:59
+     * "Добрый день, <Имя>!", если время от 12:00 до 17:59;
+     * "Добрый вечер, <Имя>!", если время от 18:00 до 22:59;
+     * "Доброй ночи, <Имя>!", если время от 23:00 до 4:59
+     * */
     public static void hello() {
         Scanner scanner = new Scanner(System.in);
         StringBuilder printHello = new StringBuilder();
@@ -106,13 +110,49 @@ public class MainClassFromSeminarOneHW {
     }
 
     /*
-    * 5.** Написать метод, которому на вход подается одномерный массив и число n
-    * (может быть положительным, или отрицательным), при этом метод должен
-    * сместить все элементы массива на n позиций. Элементы смещаются циклично.
-    * Для усложнения задачи нельзя пользоваться вспомогательными массивами.
-    * Примеры: [ 1, 2, 3 ] при n = 1 (на один вправо) -> [ 3, 1, 2 ];
-    * [ 3, 5, 6, 1] при n = -2 (на два влево) -> [ 6, 1, 3, 5 ].
-    * При каком n в какую сторону сдвиг можете выбирать сами.
-    * */
-    
+     * 5.** Написать метод, которому на вход подается одномерный массив и число n
+     * (может быть положительным, или отрицательным), при этом метод должен
+     * сместить все элементы массива на n позиций. Элементы смещаются циклично.
+     * Для усложнения задачи нельзя пользоваться вспомогательными массивами.
+     * Примеры: [ 1, 2, 3 ] при n = 1 (на один вправо) -> [ 3, 1, 2 ];
+     * [ 3, 5, 6, 1] при n = -2 (на два влево) -> [ 6, 1, 3, 5 ].
+     * При каком n в какую сторону сдвиг можете выбирать сами.
+     * */
+    public static int[] displaceElements(int[] arr, int shift) {
+        boolean forward = shift > 0;
+        int firstIndex = 0;
+        int lastIndex = arr.length - 1;
+        while (shift != 0) {
+            int savedVal;
+            int nextIndex;
+            if (forward) {
+                savedVal = arr[firstIndex];
+                for (int i = 0; i < arr.length; i++) {
+                    if (i == lastIndex) {
+                        nextIndex = firstIndex;
+                    } else {
+                        nextIndex = i + 1;
+                    }
+                    int nextVal = arr[nextIndex];
+                    arr[nextIndex] = savedVal;
+                    savedVal = nextVal;
+                }
+                shift--;
+            } else {
+                savedVal = arr[lastIndex];
+                for (int i = lastIndex; i >= 0; i--) {
+                    if (i == firstIndex) {
+                        nextIndex = lastIndex;
+                    } else {
+                        nextIndex = i - 1;
+                    }
+                    int nextVal = arr[nextIndex];
+                    arr[nextIndex] = savedVal;
+                    savedVal = nextVal;
+                }
+                shift++;
+            }
+        }
+        return arr;
+    }
 }
