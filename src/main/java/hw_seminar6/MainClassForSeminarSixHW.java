@@ -22,7 +22,7 @@ public class MainClassForSeminarSixHW {
                 Для выхода введите 'exit'.
                 Для задания параметров фильтра введите 'filter'.
                 Для сброса параметров фильтра введите 'clear'.
-                Для применения фильтра и выводв результата введите 'print'.""";
+                Для применения фильтра и вывода результата введите 'print'.""";
         System.out.println(help);
         HashMap<String, String> filterParameters = new HashMap<>();
         while (true) {
