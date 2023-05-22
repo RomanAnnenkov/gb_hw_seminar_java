@@ -128,7 +128,7 @@ public class MainClassForSeminarSixHW {
         for (Notebook nb : notebooks) {
             if ((minRamGB != 0 && nb.ramGb < minRamGB) ||
                     (minStorageCapacityGb != 0 && nb.storageCapacityGb < minStorageCapacityGb) ||
-                    (minPrice != 0 && nb.price != minPrice) ||
+                    (minPrice != 0 && nb.price < minPrice) ||
                     (!brand.isEmpty() && !nb.brand.equalsIgnoreCase(brand)) ||
                     (!color.isEmpty() && !nb.color.equalsIgnoreCase(color))
             ) {
